@@ -1,3 +1,3 @@
 # Global Warming: The Game!
 
-<img src=img/logo.png>
+<img src=img/logo.svg>
