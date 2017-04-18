@@ -26,11 +26,20 @@ class Board {
 
     this.matrix.forEach((row,y) => {
       row.forEach((cell,x) => {
-        this.el.insertAdjacentHTML('beforeend', `<div class=grass>[${x}, ${y}]</div>`)
+        this.el.insertAdjacentHTML('beforeend', `<div data-row=${y} data-column=${x} class=grass>[${x}, ${y}]</div>`)
       })
     })
   }
 
+  at(x,y){
+    return Array.from(this.el.querySelectorAll('div'))
+      .find(div => div.dataset.x == x && div.dataset.y == y)
+  }
+
+  put(item, x,y){
+    this.at(x,y).appendChild(item);
+  }
+  
 
   get margins(){
     return {
@@ -48,22 +57,11 @@ class Board {
 
 
   listen(){
-    document.addEventListener('keyup', keyupEvent => {
-      switch(keyupEvent.key){
-        case "ArrowUp":
-          this.move(0,-1); 
-          break; 
-        case "ArrowDown":
-          this.move(0,1); 
-          break; 
-        case "ArrowLeft":
-          this.move(-1,0); 
-          break; 
-        case "ArrowRight":
-          this.move(1,0); 
-          break; 
-      }
-    })
+    /* prevent scrollback from mouse */
+    history.pushState(null, null, location.href);
+    window.onpopstate = function(event) {
+        history.go(1);
+    };
   }
 }
 
@@ -76,8 +74,6 @@ class Lake {
 
 
 
-let board = new Board(dimensions={rows:10,columns:10});
+let board = new Board(dimensions={rows:50,columns:50});
 board.render();
-
-
 

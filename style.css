@@ -1,9 +1,12 @@
+* {
+  box-sizing:border-box;
+}
 body {
   margin:0;
   padding:0;
 }
 
-main {
+#wasmain {
   position:fixed;
   top:0;
   left:0;
@@ -22,14 +25,19 @@ main {
 }
 
 #board {
-  grid-area: board;
   display:grid;
   
   background:transparent;
 }
 
 #controls {
-  grid-area: controls;
+  display:flex;
+  align-items:center;
+  padding:1em;
+  position:fixed;
+  bottom:0;
+  width: 100%;
+  height:100px;
   background-image: linear-gradient(#666,#333);
   border-top: 4px solid #444;
 }
