@@ -1,0 +1,12 @@
+#board > div {
+  width: 100px;
+  height: 100px;
+}
+
+.grass {
+  background-image: url(img/tiles/grass.svg);
+}
+
+.water {
+  background-image: url(img/tiles/water.svg);
+}
