@@ -16,6 +16,7 @@ body {
 #controls {
   display:flex;
   align-items:center;
+  justify-content: space-between;
   padding:1em;
   position:fixed;
   bottom:0;
@@ -24,3 +25,38 @@ body {
   background-image: linear-gradient(#666,#333);
   border-top: 4px solid #444;
 }
+
+#energy-meter {
+  display:flex;
+  align-items: space-between;
+  width: 400px;
+  background:#222;
+  padding: 0 4px;
+  border-radius: 5px;
+}
+
+#mix {
+  display:flex;
+  flex:1;
+  background:#333;
+}
+
+.fossil-value {
+  display:flex;
+  background:red;
+  width: 20%;
+}
+
+.renewable-value {
+  display:flex;
+  background:green;
+  width: 40%;
+}
+
+.blank-value {
+  display:flex;
+  background:transparent;
+  flex:1;
+}
+
+
