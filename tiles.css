@@ -4,9 +4,13 @@
 }
 
 .grass {
-  background-image: url(img/tiles/grass.svg);
+  background-image: url(img/terrain/grass.svg);
 }
 
 .water {
-  background-image: url(img/tiles/water.svg);
+  background-image: url(img/terrain/water.svg);
+}
+
+.concrete {
+  background-image: url(img/terrain/concrete.svg);
 }

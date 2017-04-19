@@ -18,15 +18,15 @@ class Board {
     this.el.style.gridTemplateRows = `repeat(${this.rows}, [row] ${this.tileSize.x}px)`;
     this.el.style.gridTemplateColumns = `repeat(${this.columns}, [col] ${this.tileSize.y}px)`;
 
-    this.matrix = Array(this.rows).fill().map((_,i) => 
-      Array(this.columns).fill().map((_,j) => {
-        return 'grass'  
-      })
+    this.matrix = Array(this.rows).fill().map((_,y) => 
+      Array(this.columns).fill().map((_,x) => 
+        new Place({x,y,terrain:'concrete'})
+      )
     )
 
     this.matrix.forEach((row,y) => {
-      row.forEach((cell,x) => {
-        this.el.insertAdjacentHTML('beforeend', `<div data-row=${y} data-column=${x} class=grass>[${x}, ${y}]</div>`)
+      row.forEach((place,x) => {
+        this.el.appendChild(place.render())
       })
     })
   }
@@ -36,7 +36,7 @@ class Board {
       .find(div => div.dataset.x == x && div.dataset.y == y)
   }
 
-  put(item, x,y){
+  putItemAt(item, x,y){
     this.at(x,y).appendChild(item);
   }
   
@@ -72,8 +72,6 @@ class Lake {
   }
 }
 
-
-
-let board = new Board(dimensions={rows:50,columns:50});
+let board = new Board(dimensions={rows:20,columns:20});
 board.render();
 
