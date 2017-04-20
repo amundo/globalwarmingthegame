@@ -6,6 +6,8 @@ class Place {
     this.terrain = terrain;
     this.el = document.createElement('div');
     this.el.classList.add(this.terrain);
+    this.el.dataset.x = x;
+    this.el.dataset.y = y;
   }
 
   renderItem(item){

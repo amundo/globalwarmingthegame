@@ -1,10 +1,12 @@
 class Board {
-  constructor(dimensions={columns:50, rows:50}, tileSize={x: 100, y: 100}){
+  constructor({dimensions={columns:50, rows:50}, tileSize={x: 100, y: 100}, matrix=null}){
+console.log(matrix);
     this.el = document.querySelector('#board');
     this.rows = dimensions.rows;
     this.columns = dimensions.columns;
     this.tileSize = tileSize;
 
+    this.initializeMatrix(matrix);
     this.render();
 
     this.el.style.marginLeft =  0;
@@ -13,16 +15,23 @@ class Board {
     this.listen();
   }
 
+  initializeMatrix(matrix=null){
+    if(matrix){
+console.log(matrix);
+      this.matrix = matrix
+    } else { 
+      this.matrix = Array(this.rows).fill().map((_,y) => 
+        Array(this.columns).fill().map((_,x) => 
+          new Place({x,y,terrain:'concrete'})
+        )
+      )
+    }
+  }
+
   render(){
     this.el.innerHTML = '';
     this.el.style.gridTemplateRows = `repeat(${this.rows}, [row] ${this.tileSize.x}px)`;
     this.el.style.gridTemplateColumns = `repeat(${this.columns}, [col] ${this.tileSize.y}px)`;
-
-    this.matrix = Array(this.rows).fill().map((_,y) => 
-      Array(this.columns).fill().map((_,x) => 
-        new Place({x,y,terrain:'concrete'})
-      )
-    )
 
     this.matrix.forEach((row,y) => {
       row.forEach((place,x) => {
@@ -32,8 +41,7 @@ class Board {
   }
 
   at(x,y){
-    return Array.from(this.el.querySelectorAll('div'))
-      .find(div => div.dataset.x == x && div.dataset.y == y)
+    return this.matrix[x][y]
   }
 
   putItemAt(item, x,y){
@@ -72,6 +80,4 @@ class Lake {
   }
 }
 
-let board = new Board(dimensions={rows:20,columns:20});
-board.render();
 

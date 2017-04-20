@@ -10,10 +10,17 @@
 <body>
 
 <main>
-  <section id="board">
+  <section id=board>
   </section>
 
-  <section id="controls">
+  <!-- section id=menu>
+    <nav>
+      <button id=edit>edit</button>
+      <button id=play>play</button>
+    </nav>
+  </section -->
+
+  <section id=controls>
     <img src=img/logo.svg>
     <img src=img/controls/happyometer.svg>
     <img src=img/controls/goldcoin.svg>
@@ -29,8 +36,52 @@
   </section>
 </main>  
 
+
 <script src=Place.js></script>
+
+<script>
+let m = `
+g g g g g g g g c c c c c c c c c c c c
+c c c c c c c c c c c c c c c c c c c c
+c c c c c c c c c c c c c c c c c c c c
+c c c c c c c c c c c c c c c c c c c c
+c c c c c c c c c c c c c c c c c c c c
+c c c c c c c c c c c c c c c c c c c c
+c c c c c c c c c c c c c c c c c c c c
+c c c c c c g g c c c c c c c c c c c c
+c c c c c c g g c c c c c c c c c c c c
+c c c c c c c c c c c c c c c c c c c c
+c c c c c c c c c c c c c c c c c c c c
+c c c c c c c c c c c c c c c c c c c c
+c c c c c c c c c c c c c c c c c c c c
+c c c c c c c c c c c c c c c c c c c c
+c c c c c c c c c c c c c c c c c c c c
+c c c c c c c c c c c c c c c c c c c c
+c c c c c c c c c c c c c c c c c c c c
+c c c c c c c c c c c c c c c c c c c c
+c c c c c c c c c c c c c c c c c c c c
+c c c c c c c c c c c c c c c c c c c c
+`.trim().split(`\n`).map(line => line.split(' ')
+.map(x => ({
+  'c': 'concrete',
+  'h': 'house',
+  'f': 'factory',
+  'l': 'coal',
+  'g': 'grass'
+}[x])));
+
+m = m.map((rows,y) => {
+  return rows.map((columns, x) => {
+    //if(x === 0){ console.log(new Place({x,y,items:[],terrain:m[x][y]}))}
+    return new Place({x,y,items:[],terrain:m[x][y]})
+  })
+})
+
+  
+
+</script>
 <script src=Item.js></script>
 <script src=Board.js></script>
+<script src=Game.js></script>
 </body>
 </html>

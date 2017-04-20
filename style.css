@@ -28,7 +28,6 @@ body {
 
 #energy-meter {
   display:flex;
-  align-items: space-between;
   width: 400px;
   background:#222;
   padding: 0 4px;
@@ -59,4 +58,12 @@ body {
   flex:1;
 }
 
-
+#menu {
+  position:fixed;
+  top: 1em;
+  right:1em;
+  width: 200px;
+  height: calc(100% - 100px - 2em);
+  background-image: linear-gradient(#666,#333);
+  border-radius: 5px; 
+}
