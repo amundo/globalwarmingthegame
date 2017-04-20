@@ -8,6 +8,8 @@ class Place {
     this.el.dataset.x = x;
     this.el.dataset.y = y;
     this.terrain = terrain;
+
+    this.render();
   }
 
   get terrain(){
@@ -26,7 +28,6 @@ class Place {
       }
       this.el.appendChild(item.render())
     })
-    return this.el;
   }
 
 }

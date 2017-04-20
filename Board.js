@@ -1,6 +1,5 @@
 class Board {
-  constructor({dimensions={columns:50, rows:50}, tileSize={x: 100, y: 100}, matrix=null}){
-console.log(matrix);
+  constructor({dimensions={columns:3, rows:3}, tileSize={x: 100, y: 100}, matrix=null}){
     this.el = document.querySelector('#board');
     this.rows = dimensions.rows;
     this.columns = dimensions.columns;
@@ -17,7 +16,6 @@ console.log(matrix);
 
   initializeMatrix(matrix=null){
     if(matrix){
-console.log(matrix);
       this.matrix = matrix
     } else { 
       this.matrix = Array(this.rows).fill().map((_,y) => 
@@ -35,7 +33,7 @@ console.log(matrix);
 
     this.matrix.forEach((row,y) => {
       row.forEach((place,x) => {
-        this.el.appendChild(place.render())
+        this.el.appendChild(place.el)
       })
     })
   }

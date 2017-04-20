@@ -78,26 +78,27 @@ cccccccccccccccccccc
 `
 
 let parsePattern = pattern => 
-pattern
-  .trim()
-  .split(`\n`)
-   .map(line => line.split('')
-     .map(code => ({
-       "c": "concrete",
-       "g": "grass",
-     
-       "h": "house",
-       "m": "community_center",
-       "t": "tree",
-     
-       "f": "factory",
-       "n": "natural_gas",
-       "l": "coal",
-       "o": "oil"
-     }[code]))
-   );
-
-m = parsePattern(small);
+  pattern
+    .trim()
+    .split(`\n`)
+     .map(line => line.split('')
+       .map(code => ({
+         "c": "concrete",
+         "g": "grass",
+       
+         "h": "house",
+         "m": "community_center",
+         "t": "tree",
+       
+         "f": "factory",
+         "n": "natural_gas",
+         "l": "coal",
+         "o": "oil"
+       }[code]))
+     );
+  
+m = parsePattern(big);
+console.log(m);
 
 m = m.map((rows,y) => {
   return rows.map((columns, x) => {
@@ -126,8 +127,7 @@ m = m.map((rows,y) => {
 })
 
 let board = new Board({
-    dimensions:{columns:20,rows:20},
-    tileSize: {x:100,y:100}, 
+    dimensions: {rows: m[0].length, columns: m.length}, 
     matrix: m
 });
 
