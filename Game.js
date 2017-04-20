@@ -12,7 +12,7 @@ class Game {
   }
 
   render(){
-    this.board.matrix[0][0].el.textContent = this.n;
+    this.board.render();
   }
 
   run(){
@@ -28,13 +28,4 @@ class Game {
     clearInterval(this.intervalID) 
   }
 }
-
-let board = new Board({
-    dimensions:{columns:20,rows:20},
-    tileSize: {x:100,y:100}, 
-    matrix: m
-});
-let game = new Game({board});
-
-
 

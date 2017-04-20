@@ -1,23 +1,31 @@
 class Place {
-  constructor({x,y,items=[],terrain='grass'}){
+  constructor({x,y,items=[],terrain='concrete'}){
     this.x = x;
     this.y = y;
     this.items = items;
-    this.terrain = terrain;
     this.el = document.createElement('div');
-    this.el.classList.add(this.terrain);
+
     this.el.dataset.x = x;
     this.el.dataset.y = y;
+    this.terrain = terrain;
   }
 
-  renderItem(item){
-    let img = document.createElement('img');
-    img.src = `img/${item.type}/${item.file}`;
-    this.el.appendChild(img);
+  get terrain(){
+    return this.el.dataset.terrain;
+  }
+
+  set terrain(terrain){
+    this.el.dataset.terrain = terrain;
+    return terrain;
   }
 
   render(){
-    this.items.forEach(this.renderItem)
+    this.items.forEach(item => {
+      if(!(item instanceof Item)){
+        item  = new Item({item})
+      }
+      this.el.appendChild(item.render())
+    })
     return this.el;
   }
 

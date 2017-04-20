@@ -40,42 +40,6 @@
 <script src=Place.js></script>
 
 <script>
-let m = `
-g g g g g g g g c c c c c c c c c c c c
-c c c c c c c c c c c c c c c c c c c c
-c c c c c c c c c c c c c c c c c c c c
-c c c c c c c c c c c c c c c c c c c c
-c c c c c c c c c c c c c c c c c c c c
-c c c c c c c c c c c c c c c c c c c c
-c c c c c c c c c c c c c c c c c c c c
-c c c c c c g g c c c c c c c c c c c c
-c c c c c c g g c c c c c c c c c c c c
-c c c c c c c c c c c c c c c c c c c c
-c c c c c c c c c c c c c c c c c c c c
-c c c c c c c c c c c c c c c c c c c c
-c c c c c c c c c c c c c c c c c c c c
-c c c c c c c c c c c c c c c c c c c c
-c c c c c c c c c c c c c c c c c c c c
-c c c c c c c c c c c c c c c c c c c c
-c c c c c c c c c c c c c c c c c c c c
-c c c c c c c c c c c c c c c c c c c c
-c c c c c c c c c c c c c c c c c c c c
-c c c c c c c c c c c c c c c c c c c c
-`.trim().split(`\n`).map(line => line.split(' ')
-.map(x => ({
-  'c': 'concrete',
-  'h': 'house',
-  'f': 'factory',
-  'l': 'coal',
-  'g': 'grass'
-}[x])));
-
-m = m.map((rows,y) => {
-  return rows.map((columns, x) => {
-    //if(x === 0){ console.log(new Place({x,y,items:[],terrain:m[x][y]}))}
-    return new Place({x,y,items:[],terrain:m[x][y]})
-  })
-})
 
   
 
@@ -83,5 +47,92 @@ m = m.map((rows,y) => {
 <script src=Item.js></script>
 <script src=Board.js></script>
 <script src=Game.js></script>
+
+<script>
+let small = `
+ggc
+ccc
+cfc
+`
+let big = `
+ghggggggcccccccccccc
+ccfccmcccccccccccccc
+ccfccmcccccccccccccc
+ccfccmcccccccccccccc
+ccfccmcccccccccccccc
+ccfccccccccccccccccc
+cccccccccccccccccccc
+ccccccggcccccccccccc
+ccccccggcccccccccccc
+cccccccccccccccccccc
+cccccccccccccccccccc
+cccccccccccccccccccc
+cccccccccccccccccccc
+cccccccccccccccccccc
+cccccccccccccccccccc
+cccccccccccccccccccc
+cccccccccccccccccccc
+cccccccccccccccccccc
+cccccccccccccccccccc
+cccccccccccccccccccc
+`
+
+let parsePattern = pattern => 
+pattern
+  .trim()
+  .split(`\n`)
+   .map(line => line.split('')
+     .map(code => ({
+       "c": "concrete",
+       "g": "grass",
+     
+       "h": "house",
+       "m": "community_center",
+       "t": "tree",
+     
+       "f": "factory",
+       "n": "natural_gas",
+       "l": "coal",
+       "o": "oil"
+     }[code]))
+   );
+
+m = parsePattern(small);
+
+m = m.map((rows,y) => {
+  return rows.map((columns, x) => {
+    let code = m[x][y];
+    let data = {x,y,terrain:m[x][y], items:[]}
+    switch(data.terrain){
+      case "factory":
+        data.terrain = "concrete";
+        data.items.push(new Item({name: "factory", alignment:"bad"}))
+        break;
+      case "oil":
+        data.terrain = "concrete";
+        data.items.push(new Item({name: "oil", alignment:"bad"}))
+        break;
+      case "community_center":
+        data.terrain = "grass";
+        data.items.push(new Item({name: "community_center", alignment:"good"}))
+        break;
+      case "house":
+        data.terrain = "grass";
+        data.items.push(new Item({name: "house", alignment:"good"}))
+        break;
+    }
+    return new Place(data)
+  })
+})
+
+let board = new Board({
+    dimensions:{columns:20,rows:20},
+    tileSize: {x:100,y:100}, 
+    matrix: m
+});
+
+let game = new Game({board});
+
+</script>
 </body>
 </html>

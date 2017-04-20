@@ -3,14 +3,14 @@
   height: 100px;
 }
 
-.grass {
+[data-terrain=grass] {
   background-image: url(img/terrain/grass.svg);
 }
 
-.water {
+[data-terrain=water] {
   background-image: url(img/terrain/water.svg);
 }
 
-.concrete {
+[data-terrain=concrete] {
   background-image: url(img/terrain/concrete.svg);
 }
