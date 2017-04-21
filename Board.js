@@ -26,6 +26,10 @@ class Board {
     this.columns = this.matrix[0].length;
   }
 
+  get tiles(){
+    return this.matrix.reduce((tiles, row) => tiles.concat(...row) , [])
+  }
+
   render(){
     this.el.innerHTML = '';
     this.el.style.gridTemplateRows = `repeat(${this.rows}, [row] ${this.tileSize.x}px)`;
