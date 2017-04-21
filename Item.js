@@ -1,6 +1,7 @@
 class Item {
-  constructor({name, alignment}={}){
+  constructor({name, alignment, price=0}={}){
     this.name = name; 
+    this.price = price; 
     this.alignment = alignment; 
   }
 

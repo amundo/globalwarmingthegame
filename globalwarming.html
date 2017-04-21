@@ -51,30 +51,18 @@
 <script>
 let small = `
 ggc
-ccc
+ccn
 cfc
 `
 let big = `
-ghggggggcccccccccccc
-ccfccmcccccccccccccc
-ccfccmcccccccccccccc
-ccfccmcccccccccccccc
-ccfccmcccccccccccccc
-ccfccccccccccccccccc
-cccccccccccccccccccc
-ccccccggcccccccccccc
-ccccccggcccccccccccc
-cccccccccccccccccccc
-cccccccccccccccccccc
-cccccccccccccccccccc
-cccccccccccccccccccc
-cccccccccccccccccccc
-cccccccccccccccccccc
-cccccccccccccccccccc
-cccccccccccccccccccc
-cccccccccccccccccccc
-cccccccccccccccccccc
-cccccccccccccccccccc
+ghggggggccccccccc
+cwfccmccccccwwccc
+cwfccmcccccwwwwcc
+cwfccmccccccccccc
+cwfccmccccccccccc
+cwfcccccccccccccc
+cccnnnnnncccccccc
+ccccccggccccccccc
 `
 
 let parsePattern = pattern => 
@@ -89,6 +77,7 @@ let parsePattern = pattern =>
          "h": "house",
          "m": "community_center",
          "t": "tree",
+         "w": "wind",
        
          "f": "factory",
          "n": "natural_gas",
@@ -97,21 +86,28 @@ let parsePattern = pattern =>
        }[code]))
      );
   
-m = parsePattern(big);
-console.log(m);
+let m = parsePattern(big);
 
-m = m.map((rows,y) => {
-  return rows.map((columns, x) => {
+m = m.map((row,x) => {
+  return row.map((column, y) => {
     let code = m[x][y];
-    let data = {x,y,terrain:m[x][y], items:[]}
+    let data = {x,y,terrain:code, items:[]}
     switch(data.terrain){
       case "factory":
         data.terrain = "concrete";
         data.items.push(new Item({name: "factory", alignment:"bad"}))
         break;
+      case "wind":
+        data.terrain = "grass";
+        data.items.push(new Item({name: "wind", alignment:"good"}))
+        break;
       case "oil":
         data.terrain = "concrete";
         data.items.push(new Item({name: "oil", alignment:"bad"}))
+        break;
+      case "natural_gas":
+        data.terrain = "concrete";
+        data.items.push(new Item({name: "natural_gas", alignment:"good"}))
         break;
       case "community_center":
         data.terrain = "grass";
@@ -127,7 +123,6 @@ m = m.map((rows,y) => {
 })
 
 let board = new Board({
-    dimensions: {rows: m[0].length, columns: m.length}, 
     matrix: m
 });
 

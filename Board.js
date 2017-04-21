@@ -1,8 +1,6 @@
 class Board {
-  constructor({dimensions={columns:3, rows:3}, tileSize={x: 100, y: 100}, matrix=null}){
+  constructor({tileSize={x: 100, y: 100}, matrix=null}){
     this.el = document.querySelector('#board');
-    this.rows = dimensions.rows;
-    this.columns = dimensions.columns;
     this.tileSize = tileSize;
 
     this.initializeMatrix(matrix);
@@ -24,6 +22,8 @@ class Board {
         )
       )
     }
+    this.rows = this.matrix.length;
+    this.columns = this.matrix[0].length;
   }
 
   render(){
