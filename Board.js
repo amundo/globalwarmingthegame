@@ -42,18 +42,6 @@ class Board {
     return this.matrix[x][y]
   }
 
-  putItemAt(item, x,y){
-    this.at(x,y).appendChild(item);
-  }
-  
-
-  get margins(){
-    return {
-      x: parseInt(this.el.style.marginLeft.replace('px','')),
-      y: parseInt(this.el.style.marginTop.replace('px',''))
-    }
-  }
-
   move(x,y){
     let horizontal = this.tileSize.x * x;
     let vertical = this.tileSize.y * y;
