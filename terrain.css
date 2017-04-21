@@ -11,6 +11,11 @@
   background-image: url(img/terrain/water.svg);
 }
 
+[data-terrain=water_murky] {
+  background-image: url(img/terrain/water_murky.svg);
+}
+
+
 [data-terrain=concrete] {
   background-image: url(img/terrain/concrete.svg);
 }

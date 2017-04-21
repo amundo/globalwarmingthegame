@@ -50,15 +50,16 @@
 
 <script>
 let small = `
-ggc
-ccn
-cfc
+ccc
+ccc
+cch
 `
 let big = `
-cggg
-gggg
-gggg
-gggg
+kkccc
+kfccc
+ccccc
+ccchc
+ccccc
 `
 
 let parsePattern = pattern => 
@@ -69,12 +70,14 @@ let parsePattern = pattern =>
        .map(code => ({
          "c": "concrete",
          "g": "grass",
+         "a": "water",
        
          "h": "house",
          "m": "community_center",
          "t": "tree",
          "w": "wind",
        
+         "k": "water_murky",
          "f": "factory",
          "n": "natural_gas",
          "l": "coal",
