@@ -9,6 +9,18 @@
 </head>
 <body>
 
+<div class=hidden id=popup>
+<header>
+  <h1></h1>
+  <nav>
+    <button>terrain</button>
+    <button>buildings</button>
+  </nav>
+</header>
+<section>
+</section>
+</div><!-- popup -->
+
 <main>
   <section id=board>
   </section>
@@ -21,7 +33,7 @@
   </section -->
 
   <section id=controls>
-    <img src=img/logo.svg>
+    <img id=logo src=img/logo.svg>
     <img src=img/controls/happyometer.svg>
     <img src=img/controls/goldcoin.svg>
     <div id=energy-meter>
@@ -39,13 +51,9 @@
 
 <script src=Place.js></script>
 
-<script>
-
-  
-
-</script>
 <script src=Item.js></script>
 <script src=Board.js></script>
+<script src=Controls.js></script>
 <script src=Game.js></script>
 
 <script>
@@ -55,11 +63,18 @@ ccc
 cch
 `
 let big = `
-kkccc
-kfccc
-ccccc
-ccchc
-ccccc
+cccccckkkcccccccccc
+cccccckkkcccccccccc
+ccccccccccccccccccc
+cckcckkcccccccccccc
+ccccckfcccccocccccc
+cccccccccccccccoccc
+ncchcngghcccooccccc
+cccchgbmcccoccccccc
+ccccchgggggggwwwggg
+ccchcchcgggaaawwggg
+ncccnggggggaaawwggg
+cccccgggggggggggggg
 `
 
 let parsePattern = pattern => 
@@ -74,6 +89,7 @@ let parsePattern = pattern =>
        
          "h": "house",
          "m": "community_center",
+         "b": "library",
          "t": "tree",
          "w": "wind",
        
@@ -87,6 +103,8 @@ let parsePattern = pattern =>
   
 let m = parsePattern(big);
 
+let terrains = {};
+
 m = m.map((row,x) => {
   return row.map((column, y) => {
     let code = m[x][y];
@@ -95,26 +113,37 @@ m = m.map((row,x) => {
       case "factory":
         data.terrain = "concrete";
         data.items.push(new Item({name: "factory", alignment:"bad"}))
+        terrains[code] = data;
         break;
       case "wind":
         data.terrain = "grass";
         data.items.push(new Item({name: "wind", alignment:"good"}))
+        terrains[code] = data;
         break;
       case "oil":
         data.terrain = "concrete";
         data.items.push(new Item({name: "oil", alignment:"bad"}))
+        terrains[code] = data;
         break;
       case "natural_gas":
         data.terrain = "concrete";
         data.items.push(new Item({name: "natural_gas", alignment:"good"}))
+        terrains[code] = data;
+        break;
+      case "library":
+        data.terrain = "grass";
+        data.items.push(new Item({name: "library", alignment:"good"}))
+        terrains[code] = data;
         break;
       case "community_center":
         data.terrain = "grass";
         data.items.push(new Item({name: "community_center", alignment:"good"}))
+        terrains[code] = data;
         break;
       case "house":
         data.terrain = "grass";
         data.items.push(new Item({name: "house", alignment:"good"}))
+        terrains[code] = data;
         break;
     }
     return new Place(data)

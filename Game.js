@@ -4,6 +4,7 @@ class Game {
     this.board.render();
     this.n = 0;
 
+    this.controls = new Controls;
     this.intervalID = this.start();
   }
 
